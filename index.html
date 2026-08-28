@@ -28,51 +28,55 @@
           </div>
           
           <!-- Checkboxes de Tipo Gramatical -->
-          <div class="form-group">
-            <label>Tipo Gramatical</label>
-            <div class="checkbox-group" id="grammar-checkboxes">
-              <label><input type="checkbox" name="grammar" value="Substantivo"> Substantivo</label>
-              <label><input type="checkbox" name="grammar" value="Verbo"> Verbo–<p class="unmun">pol</p></label>
-              <label><input type="checkbox" name="grammar" value="Adjetivo"> Adjetivo–<p class="unmun">wo</p></label>
-              <label><input type="checkbox" name="grammar" value="Advérbio"> Advérbio–<p class="unmun">jam</p></label>
-              <label><input type="checkbox" name="grammar" value="Pronome"> Pronome</label>
-              <label><input type="checkbox" name="grammar" value="Particula"> Particula</label>
-              <label><input type="checkbox" name="grammar" value="Conjunção"> Conjunção</label>
-              <label><input type="checkbox" name="grammar" value="Tempo"> Tempo verbal</label>
-              <label><input type="checkbox" name="grammar" value="Prefixo"> Prefixo</label>
-              <label><input type="checkbox" name="grammar" value="Sufixo"> Sufixo</label>
-              <label><input type="checkbox" name="grammar" value="Juncoes"> Junção</label>
-              <label><input type="checkbox" name="grammar" value="Frases"> Frase</label>
-            </div>
-          </div>
+<div class="form-group">
+  <label>Tipo Gramatical</label>
+  <div class="checkbox-group" id="grammar-checkboxes">
+    <label><input type="checkbox" name="grammar" value="Substantivo"> Substantivo</label>
+    <label><input type="checkbox" name="grammar" value="Verbo"> Verbo–<span class="unmun">pol</span></label>
+    <label><input type="checkbox" name="grammar" value="Adjetivo"> Adjetivo–<span class="unmun">wo</span></label>
+    <label><input type="checkbox" name="grammar" value="Advérbio"> Advérbio–<span class="unmun">jam</span></label>
+    <label><input type="checkbox" name="grammar" value="Pronome"> Pronome</label>
+    <label><input type="checkbox" name="grammar" value="Particula"> Particula</label>
+    <label><input type="checkbox" name="grammar" value="Conjunção"> Conjunção</label>
+    <label><input type="checkbox" name="grammar" value="Tempo"> Tempo verbal</label>
+    <label><input type="checkbox" name="grammar" value="Prefixo"> Prefixo</label>
+    <label><input type="checkbox" name="grammar" value="Sufixo"> Sufixo</label>
+    <label><input type="checkbox" name="grammar" value="Juncoes"> Junção</label>
+    <label><input type="checkbox" name="grammar" value="Frases"> Frase</label>
+  </div>
+</div>
 
-          <button type="submit" id="save-btn" class="action-btn">Salvar Palavra</button>
-          <button type="button" id="cancel-btn" class="action-btn" style="background-color: var(--text-light); display: none; margin-left: 8px;">Cancelar</button>
-          </form>
-          <button id="export-btn">Exportar Backup (JSON)</button>
-          <input type="file" id="import-file" accept=".json" style="display: none;">
-          <button id="import-btn">Importar Backup</button>
-      </div>
+<button type="submit" id="save-btn" class="action-btn">Salvar Palavra</button>
+<button type="button" id="cancel-btn" class="action-btn" style="background-color: var(--text-light); display: none; margin-left: 8px;">Cancelar</button>
+</form>
+<button id="export-btn">Exportar Backup (JSON)</button>
+<input type="file" id="import-file" accept=".json" style="display: none;">
+<button id="import-btn">Importar Backup</button>
+</div>
 
-      <!-- Barra de Pesquisa e Filtro -->
-      <div class="search-container">
-        <div class="search-box">
-          <input type="text" id="search-input" autocapitalize="none" placeholder="Pesquisar palavra...">
-        </div>
-        <div class="filter-box">
-          <select id="grammar-filter">
-            <option value="">Filtrar por tipo...</option>
-            <option value="Substantivo">Substantivo</option>
-            <option value="Verbo">Verbo</option>
-            <option value="Adjetivo">Adjetivo</option>
-            <option value="Advérbio">Advérbio</option>
-            <option value="Pronome">Pronome</option>
-            <option value="Preposição">Preposição</option>
-            <option value="Conjunção">Conjunção</option>
-            <option value="Interjeição">Interjeição</option>
-          </select>
-        </div>
-      </div>
+<!-- Barra de Pesquisa e Filtro -->
+<div class="search-container">
+  <div class="search-box">
+    <input type="text" id="search-input" autocapitalize="none" placeholder="Pesquisar palavra...">
+  </div>
+  <div class="filter-box">
+    <select id="grammar-filter">
+      <option value="">Filtrar por tipo...</option>
+      <option value="Substantivo">Substantivo</option>
+      <option value="Verbo">Verbo</option>
+      <option value="Adjetivo">Adjetivo</option>
+      <option value="Advérbio">Advérbio</option>
+      <option value="Pronome">Pronome</option>
+      <option value="Particula">Particula</option>
+      <option value="Conjunção">Conjunção</option>
+      <option value="Tempo">Tempo verbal</option>
+      <option value="Prefixo">Prefixo</option>
+      <option value="Sufixo">Sufixo</option>
+      <option value="Juncoes">Junção</option>
+      <option value="Frases">Frase</option>
+    </select>
+  </div>
+</div>
 
       <!-- Lista de Palavras -->
       <div class="word-list" id="word-list">
