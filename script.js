@@ -32,6 +32,15 @@ themeToggleBtn.addEventListener('click', () => {
     }
 });
 
+// Mapeamento de categorias gramaticais para seus respectivos sufixos estilizados
+const grammarDetails = {
+    "Verbo": "pol",
+    "Adjetivo": "wo",
+    "Advérbio": "jam"
+    // Para adicionar novas categorias com detalhe no futuro, basta incluir aqui:
+    // "OutraCategoria": "sufixo"
+};
+
 // Carregar palavras do LocalStorage ou iniciar array vazio
 let words = JSON.parse(localStorage.getItem('dictionary_words')) || [];
 
@@ -45,14 +54,6 @@ function renderWords() {
     wordListContainer.innerHTML = '';
     const filterText = searchInput.value.toLowerCase();
     const selectedGrammarFilter = grammarFilter.value;
-
-    // 1. Mapeamento dos detalhes de cada categoria gramatical
-    const grammarDetails = {
-        "Verbo": "pol",
-        "Adjetivo": "wo",
-        "Advérbio": "jam"
-        // Adicione novos aqui no futuro,ex: "Substantivo": "abc"
-    };
 
     const filteredWords = words.filter(item => {
         const matchesText = item.word.toLowerCase().includes(filterText) || item.meaning.toLowerCase().includes(filterText);
@@ -71,13 +72,13 @@ function renderWords() {
         const wordItem = document.createElement('div');
         wordItem.className = 'word-item';
 
-        // Gerar tags HTML para os tipos gramaticais com os detalhes dinâmicos
+        // Gerar tags HTML para os tipos gramaticais
         let tagsHtml = '';
         if (item.grammar && item.grammar.length > 0) {
             tagsHtml = '<div class="grammar-tags">' + 
                 item.grammar.map(g => {
                     const escapedG = escapeHtml(g);
-                    // Verifica se existe um detalhe cadastrado para esta categoria
+                    // Verifica se existe um detalhe para esta categoria no nosso mapeamento
                     if (grammarDetails[g]) {
                         return `<span class="grammar-tag">${escapedG}–<span class="unmun">${grammarDetails[g]}</span></span>`;
                     }
@@ -270,4 +271,4 @@ importFile.addEventListener('change', (e) => {
 });
 
 renderWords();
-
+    
