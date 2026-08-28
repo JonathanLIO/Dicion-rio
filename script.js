@@ -107,6 +107,7 @@ function escapeHtml(text) {
 }
 
 // Adicionar ou Atualizar Palavra
+// Adicionar ou Atualizar Palavra
 wordForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const wordText = wordInput.value.trim();
@@ -117,6 +118,17 @@ wordForm.addEventListener('submit', (e) => {
     const selectedGrammars = Array.from(grammarCheckboxes)
         .filter(checkbox => checkbox.checked)
         .map(checkbox => checkbox.value);
+
+    // Verifica se já existe uma palavra igual (ignorando maiúsculas/minúsculas)
+    // Se estiver editando, ignoramos a própria palavra que está sendo alterada
+    const wordExists = words.some(item => 
+        item.word.toLowerCase() === wordText.toLowerCase() && item.id !== id
+    );
+
+    if (wordExists) {
+        alert('Esta palavra já está cadastrada no dicionário!');
+        return;
+    }
 
     if (id) {
         const index = words.findIndex(item => item.id === id);
