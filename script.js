@@ -42,9 +42,18 @@ function saveDataAndRender() {
 
 // Renderizar a lista de palavras na tela
 function renderWords() {
+function renderWords() {
     wordListContainer.innerHTML = '';
     const filterText = searchInput.value.toLowerCase();
     const selectedGrammarFilter = grammarFilter.value;
+
+    // 1. Mapeamento dos detalhes de cada categoria gramatical
+    const grammarDetails = {
+        "Verbo": "pol",
+        "Adjetivo": "wo",
+        "Advérbio": "jam"
+        // Adicione novos aqui no futuro,ex: "Substantivo": "abc"
+    };
 
     const filteredWords = words.filter(item => {
         const matchesText = item.word.toLowerCase().includes(filterText) || item.meaning.toLowerCase().includes(filterText);
@@ -63,11 +72,18 @@ function renderWords() {
         const wordItem = document.createElement('div');
         wordItem.className = 'word-item';
 
-        // Gerar tags HTML para os tipos gramaticais
+        // Gerar tags HTML para os tipos gramaticais com os detalhes dinâmicos
         let tagsHtml = '';
         if (item.grammar && item.grammar.length > 0) {
             tagsHtml = '<div class="grammar-tags">' + 
-                item.grammar.map(g => `<span class="grammar-tag">${escapeHtml(g)}</span>`).join('') + 
+                item.grammar.map(g => {
+                    const escapedG = escapeHtml(g);
+                    // Verifica se existe um detalhe cadastrado para esta categoria
+                    if (grammarDetails[g]) {
+                        return `<span class="grammar-tag">${escapedG}–<span class="unmun">${grammarDetails[g]}</span></span>`;
+                    }
+                    return `<span class="grammar-tag">${escapedG}</span>`;
+                }).join('') + 
                 '</div>';
         }
 
