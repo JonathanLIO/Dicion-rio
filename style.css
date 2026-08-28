@@ -1,0 +1,289 @@
+ :root {
+        --bg-color: #f4f6f9;
+        --card-bg: #ffffff;
+        --primary: #4f46e5;
+        --primary-hover: #4338ca;
+        --text: #1f2937;
+        --text-light: #6b7280;
+        --border: #e5e7eb;
+        --danger: #ef4444;
+        --danger-hover: #dc2626;
+        --edit: #f59e0b;
+        --edit-hover: #d97706;
+      }
+
+      [data-theme="dark"] {
+        --bg-color: #111827;
+        --card-bg: #1f2937;
+        --primary: #6366f1;
+        --primary-hover: #4f46e5;
+        --text: #f9fafb;
+        --text-light: #9ca3af;
+        --border: #374151;
+        --danger: #f87171;
+        --danger-hover: #ef4444;
+        --edit: #fbbf24;
+        --edit-hover: #f59e0b;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text);
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+      }
+
+      .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      h1 {
+        color: var(--primary);
+        margin: 0;
+      }
+
+      .theme-toggle {
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--card-bg);
+        transition: background-color 0.2s, border-color 0.2s;
+      }
+
+      .theme-toggle:hover {
+        border-color: var(--primary);
+      }
+
+      .card {
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: background-color 0.3s;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 14px;
+        box-sizing: border-box;
+        outline: none;
+        background-color: var(--card-bg);
+        color: var(--text);
+        transition: border-color 0.2s;
+      }
+
+      input[type="text"]:focus,
+      textarea:focus {
+        border-color: var(--primary);
+      }
+
+      textarea {
+        resize: vertical;
+        height: 80px;
+      }
+
+      button.action-btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      button.action-btn:hover {
+        background-color: var(--primary-hover);
+      }
+
+      .search-box {
+        margin-bottom: 20px;
+      }
+
+      .word-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .word-item {
+        background: var(--card-bg);
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid var(--primary);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        transition: background-color 0.3s;
+      }
+
+      .word-content h3 {
+        margin: 0 0 5px 0;
+        color: var(--primary);
+        font-size: 18px;
+      }
+
+      .word-content p {
+        margin: 0;
+        color: var(--text-light);
+        font-size: 14px;
+        white-space: pre-wrap;
+      }
+
+      .word-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-edit {
+        background-color: var(--edit);
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .btn-edit:hover {
+        background-color: var(--edit-hover);
+      }
+
+      .btn-delete {
+        background-color: var(--danger);
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .btn-delete:hover {
+        background-color: var(--danger-hover);
+      }
+
+      .empty-message {
+        text-align: center;
+        color: var(--text-light);
+        font-style: italic;
+        padding: 20px;
+      }
+
+      @font-face {
+        font-family: 'unmunil';
+        /* Nome que você escolheu para a fonte */
+        src: url('https://cdn.jsdelivr.net/gh/JonathanLIO/Fonte@main/MinhaFonte.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      .unmun {
+        font-family: 'unmunil', sans-serif;
+        /* Use o mesmo nome definido no @font-face */
+      }
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+  background-color: var(--bg-color);
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: normal;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-container .search-box {
+  flex: 2;
+  margin-bottom: 0;
+}
+
+.filter-box {
+  flex: 1;
+}
+
+.filter-box select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: var(--card-bg);
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+}
+
+.grammar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.grammar-tag {
+  background-color: var(--primary);
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  display: inline-block;
+}
