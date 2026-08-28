@@ -42,7 +42,6 @@ function saveDataAndRender() {
 
 // Renderizar a lista de palavras na tela
 function renderWords() {
-function renderWords() {
     wordListContainer.innerHTML = '';
     const filterText = searchInput.value.toLowerCase();
     const selectedGrammarFilter = grammarFilter.value;
