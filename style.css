@@ -214,7 +214,7 @@
       @font-face {
         font-family: 'unmunil';
         /* Nome que você escolheu para a fonte */
-        src: url('https://jsdelivr.net/gh/JonathanLIO/Fonte@main/Unmunil.ttf') format('truetype');
+        src: url('https://cdn.jsdelivr.net/gh/JonathanLIO/Fonte@main/Unmunil.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
