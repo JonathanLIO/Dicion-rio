@@ -108,19 +108,12 @@ function escapeHtml(text) {
 
 /**
  * Normaliza a palavra para a verificação de duplicatas:
- * - Ignora maiúsculas/minúsculas
- * - Remove pontuações, caracteres especiais (como ~, ", vírgula, ponto), EXCETO o apóstrofo (')
- * - Mantém letras com acentos distintas (não remove os acentos)
+ * - Mantém apenas letras minúsculas (a-z), letras minúsculas acentuadas (à-ÿ) e o apóstrofo (')
+ * - Remove letras maiúsculas (consideradas detalhes/marcadores), espaços e caracteres especiais (~, ", ., ,, parênteses, etc.)
  */
 function normalizeWord(text) {
     if (!text) return '';
-    return text
-        .toLowerCase()
-        // Remove caracteres especiais e pontuações, mantendo letras (inclusive acentuadas), números e o apóstrofo (')
-        .replace(/[^\w\sÀ-ÿ']/g, '') 
-        // Remove underscores gerados pelo \w se necessário, mas mantém o restante
-        .replace(/_/g, '')
-        .trim();
+    return text.replace(/[^a-zà-ÿ']/g, '');
 }
 
 // Adicionar ou Atualizar Palavra
@@ -138,7 +131,7 @@ wordForm.addEventListener('submit', (e) => {
     // Normaliza a palavra digitada para a validação
     const normalizedNewWord = normalizeWord(wordText);
 
-    // Verifica se já existe uma palavra igual considerando a normalização solicitada
+    // Verifica se já existe uma palavra igual considerando a normalização
     const wordExists = words.some(item => 
         normalizeWord(item.word) === normalizedNewWord && item.id !== id
     );
