@@ -106,7 +106,23 @@ function escapeHtml(text) {
     return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 
-// Adicionar ou Atualizar Palavra
+/**
+ * Normaliza a palavra para a verificação de duplicatas:
+ * - Ignora maiúsculas/minúsculas
+ * - Remove pontuações, caracteres especiais (como ~, ", vírgula, ponto), EXCETO o apóstrofo (')
+ * - Mantém letras com acentos distintas (não remove os acentos)
+ */
+function normalizeWord(text) {
+    if (!text) return '';
+    return text
+        .toLowerCase()
+        // Remove caracteres especiais e pontuações, mantendo letras (inclusive acentuadas), números e o apóstrofo (')
+        .replace(/[^\w\sÀ-ÿ']/g, '') 
+        // Remove underscores gerados pelo \w se necessário, mas mantém o restante
+        .replace(/_/g, '')
+        .trim();
+}
+
 // Adicionar ou Atualizar Palavra
 wordForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -119,10 +135,12 @@ wordForm.addEventListener('submit', (e) => {
         .filter(checkbox => checkbox.checked)
         .map(checkbox => checkbox.value);
 
-    // Verifica se já existe uma palavra igual (ignorando maiúsculas/minúsculas)
-    // Se estiver editando, ignoramos a própria palavra que está sendo alterada
+    // Normaliza a palavra digitada para a validação
+    const normalizedNewWord = normalizeWord(wordText);
+
+    // Verifica se já existe uma palavra igual considerando a normalização solicitada
     const wordExists = words.some(item => 
-        item.word.toLowerCase() === wordText.toLowerCase() && item.id !== id
+        normalizeWord(item.word) === normalizedNewWord && item.id !== id
     );
 
     if (wordExists) {
@@ -206,37 +224,24 @@ const importFile = document.getElementById('import-file');
 
 // Exportar palavras para um arquivo JSON usando Blob
 exportBtn.addEventListener('click', () => {
-    console.log("Entrou nl event listener")
     if (words.length === 0) {
         alert('Não há palavras cadastradas para exportar.');
         return;
     }
     
-    console.log(1)
-    // Cria um Blob com os dados em JSON formatado
     const dataStr = JSON.stringify(words, null, 2);
     const blob = new Blob([dataStr], { type: 'application/json;charset=utf-8;' });
-    
-    console.log(2)
-    // Gera uma URL temporária para o blob
     const url = URL.createObjectURL(blob);
     
-    console.log(3)
     const downloadAnchor = document.createElement('a');
     downloadAnchor.href = url;
     downloadAnchor.download = `backup_dicionario_${new Date().toISOString().slice(0, 10)}.json`;
     
-    console.log(4)
-    // Adiciona ao DOM, dispara o clique e remove logo em seguida
     document.body.appendChild(downloadAnchor);
-    
-    console.log(5)
-    // Pequeno atraso para garantir que o navegador processe o evento de download
     setTimeout(() => {
-        console.log(6)
         downloadAnchor.click();
         document.body.removeChild(downloadAnchor);
-        URL.revokeObjectURL(url); // Libera a memória da URL temporária
+        URL.revokeObjectURL(url);
     }, 50);
 });
 
@@ -262,7 +267,6 @@ importFile.addEventListener('change', (e) => {
             if (confirm(`Deseja substituir as palavras atuais pelas do backup ou mesclar? \nOK = Substituir tudo | Cancelar = Mesclar (adicionar junto)`)) {
                 words = importedData;
             } else {
-                // Mescla evitando IDs duplicados
                 importedData.forEach(item => {
                     if (!words.some(w => w.id === item.id)) {
                         words.push(item);
@@ -273,14 +277,13 @@ importFile.addEventListener('change', (e) => {
             saveDataAndRender();
             alert('Backup importado com sucesso!');
         } catch (error) {
-            alert('Erro ao ler o arquivo de backup. Certifique-se de que é um JSON válido.');
+            alert('Erro ao ler o arquivo de backup.\n\nCertifique-se de que é um JSON válido.');
             console.error(error);
         } finally {
-            importFile.value = ''; // Reseta o input para permitir reimportar o mesmo arquivo se necessário
+            importFile.value = '';
         }
     };
     reader.readAsText(file);
 });
 
 renderWords();
-    
